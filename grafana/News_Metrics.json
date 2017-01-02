@@ -1,0 +1,257 @@
+{
+  "id": null,
+  "title": "Docker Monitoring",
+  "description": "Monitoring",
+  "tags": [
+    "docker"
+  ],
+  "style": "dark",
+  "timezone": "browser",
+  "editable": true,
+  "hideControls": false,
+  "sharedCrosshair": true,
+  "rows": [
+          {
+            "collapse": false,
+            "editable": true,
+            "height": "150px",
+            "panels": [
+              {
+                "aliasColors": {},
+                "bars": false,
+                "datasource": "Prometheus",
+                "decimals": 2,
+                "editable": true,
+                "error": false,
+                "fill": 4,
+                "grid": {},
+                "id": 5,
+                "legend": {
+                  "alignAsTable": true,
+                  "avg": true,
+                  "current": false,
+                  "max": true,
+                  "min": true,
+                  "rightSide": true,
+                  "show": true,
+                  "total": false,
+                  "values": true
+                },
+                "lines": true,
+                "linewidth": 2,
+                "links": [],
+                "nullPointMode": "connected",
+                "percentage": false,
+                "pointradius": 5,
+                "points": false,
+                "renderer": "flot",
+                "seriesOverrides": [],
+                "span": 12,
+                "stack": true,
+                "steppedLine": false,
+                "targets": [
+                  {
+                    "expr": "sum(rate(node_cpu[1m])) by (mode) * 100 / count_scalar(node_cpu{mode=\"user\"})",
+                    "intervalFactor": 10,
+                    "legendFormat": "{{ mode }}",
+                    "metric": "node_cpu",
+                    "refId": "A",
+                    "step": 10
+                  }
+                ],
+                "timeFrom": null,
+                "timeShift": null,
+                "title": "Host CPU Usage",
+                "tooltip": {
+                  "msResolution": true,
+                  "shared": true,
+                  "sort": 2,
+                  "value_type": "individual"
+                },
+                "type": "graph",
+                "xaxis": {
+                  "show": true,
+                  "mode": "time",
+                  "name": null,
+                  "values": []
+                },
+                "yaxes": [
+                  {
+                    "format": "percent",
+                    "label": null,
+                    "logBase": 1,
+                    "max": 100,
+                    "min": 0,
+                    "show": true
+                  },
+                  {
+                    "format": "short",
+                    "label": null,
+                    "logBase": 1,
+                    "max": null,
+                    "min": 0,
+                    "show": true
+                  }
+                ],
+                "thresholds": []
+              },
+
+{
+  "aliasColors": {},
+  "bars": false,
+  "datasource": "Prometheus",
+  "decimals": 2,
+  "editable": true,
+  "error": false,
+  "fill": 1,
+  "grid": {},
+  "id": 6,
+  "legend": {
+    "alignAsTable": true,
+    "avg": true,
+    "current": false,
+    "max": true,
+    "min": true,
+    "rightSide": true,
+    "show": true,
+    "total": false,
+    "values": true
+  },
+  "lines": true,
+  "linewidth": 2,
+  "links": [],
+  "nullPointMode": "connected",
+  "percentage": false,
+  "pointradius": 5,
+  "points": false,
+  "renderer": "flot",
+  "seriesOverrides": [],
+  "span": 12,
+  "stack": false,
+  "steppedLine": false,
+  "targets": [
+    {
+      "expr": "sum(rate(container_cpu_user_seconds_total{container_label_org_label_schema_group=\"monitoring\"}[1m]) * 100  / count_scalar(node_cpu{mode=\"user\"})) by (name)",
+      "intervalFactor": 10,
+      "legendFormat": "{{ name }}",
+      "refId": "A",
+      "step": 10
+    }
+  ],
+  "timeFrom": null,
+  "timeShift": null,
+  "title": "Monitoring Containers CPU Usage",
+  "tooltip": {
+    "msResolution": true,
+    "shared": true,
+    "sort": 2,
+    "value_type": "cumulative"
+  },
+  "type": "graph",
+  "xaxis": {
+    "show": true,
+    "mode": "time",
+    "name": null,
+    "values": []
+  },
+  "yaxes": [
+    {
+      "format": "percent",
+      "label": null,
+      "logBase": 1,
+      "max": null,
+      "min": null,
+      "show": true
+    },
+    {
+      "format": "short",
+      "label": null,
+      "logBase": 1,
+      "max": null,
+      "min": null,
+      "show": true
+    }
+  ],
+  "thresholds": []
+},
+{
+  "aliasColors": {},
+  "bars": false,
+  "datasource": "Prometheus",
+  "decimals": 2,
+  "editable": true,
+  "error": false,
+  "fill": 1,
+  "grid": {},
+  "id": 100,
+  "legend": {
+    "alignAsTable": true,
+    "avg": true,
+    "current": false,
+    "max": true,
+    "min": true,
+    "rightSide": true,
+    "show": true,
+    "total": false,
+    "values": true
+  },
+  "lines": true,
+  "linewidth": 2,
+  "links": [],
+  "nullPointMode": "connected",
+  "percentage": false,
+  "pointradius": 5,
+  "points": false,
+  "renderer": "flot",
+  "seriesOverrides": [],
+  "span": 12,
+  "stack": false,
+  "steppedLine": false,
+  "targets": [
+    {
+      "expr": "sum(rate(container_cpu_user_seconds_total{container_label_org_label_schema_group!=\"monitoring\"}[1m]) * 100  / count_scalar(node_cpu{mode=\"user\"})) by (name)",
+      "intervalFactor": 10,
+      "legendFormat": "{{ name }}",
+      "refId": "A",
+      "step": 10
+    }
+  ],
+  "timeFrom": null,
+  "timeShift": null,
+  "title": "Non Monitoring Containers CPU Usage",
+  "tooltip": {
+    "msResolution": true,
+    "shared": true,
+    "sort": 2,
+    "value_type": "cumulative"
+  },
+  "type": "graph",
+  "xaxis": {
+    "show": true,
+    "mode": "time",
+    "name": null,
+    "values": []
+  },
+  "yaxes": [
+    {
+      "format": "percent",
+      "label": null,
+      "logBase": 1,
+      "max": null,
+      "min": null,
+      "show": true
+    },
+    {
+      "format": "short",
+      "label": null,
+      "logBase": 1,
+      "max": null,
+      "min": null,
+      "show": true
+    }
+  ],
+  "thresholds": []
+}
+
+]}]
+}
